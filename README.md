@@ -65,12 +65,13 @@ In your `config/scout.php` add:
     'storage'  => storage_path(), //place where the index files will be stored
     'fuzziness' => env('TNTSEARCH_FUZZINESS', false),
     'fuzzy' => [
-        'prefix_length' => 2,
-        'max_expansions' => 50,
-        'distance' => 2
+            'prefix_length' => 2,//The number of prefix (initial) characters that will not be considered for fuzziness. Most spelling errors occur toward the end of the word, not toward the beginning.
+            'max_expansions' => 50,//The maximum number of terms that the fuzzy query will expand to.
+            'distance' => 2 //the minimum number of single-character edits (insertions, deletions or substitutions) required to change one word into the other.
     ],
     'asYouType' => false,
     'searchBoolean' => env('TNTSEARCH_BOOLEAN', false),
+    'stemmer' => \TeamTNT\TNTSearch\Stemmer\NoStemmer::class
 ],
 ```
 To prevent your search indexes being commited to your project repository,
